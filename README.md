@@ -7,25 +7,20 @@
 4. [Use Case Scenario](#Use_Case_Scenario)
 
 ### 1 - Objective <a name="Objective"></a>
-
 Beat the Streak is a fantasy game created by MLB.com. The goal of the game is to pick an MLB player (or 2 players) to get a hit each day. If your selected player hits, you extend your streak. If the player does not hit, your streak ends. The player with the longest streak at the end of each season is declared the winner, and a streak of 57 wins you the grand prize of $5.6 million.
 
 The goal of this project is to select the most likely MLB players to get a hit each day. In other words, the best candidates to pick for Beat the Streak
 
 ### 2 - Background <a name="Background"></a>
-Players with sustained, multi-year careers in the NBA earn lucrative contracts, oftentimes in the eight-figure range in dollars earned per year. For example, the average salary of a player in the 2016-2017 season that had been in the NBA the previous five years was almost $10 million. 
-
-Moreover, NBA contracts and salary cap (total amount teams are allowed to pay their players) are oftentimes susceptible to rapid growth, as witnessed with the new TV deal the league signed prior to the 2016-2017 season. The massive deal brought a large amount of money to the league, and in turn increased salary cap space, and eventually players' overall salary. This project examines recent years and salaries since the TV deal, and recognizes trends in classification and predictive power, year-by-year as player salaries continue to grow.
+My strategy in Beat the Streak involves not only choosing a player who is hitting well, but also exploring other variables. The other most important thing to me is the opposing pitcher's prior performance, but I also consider some other things which I will detail in the next section.
 
 ### 3 -  Data Choices, Extraction, Cleaning, and Analysis<a name="Data_Choices"></a>
-The first thing I needed to do was choose the data I would work with for this project. I knew that I wanted to use NBA player statistics in order to predict player salary class, but I needed to specifically decide the time frame on which I’d focus for my predictions. I settled on using five years previous stats of a player to predict his yearly salary. For example, to predict a player’s salary in 2020, I used stats from 2016, 2017, 2018, 2019, 2020. I made this decision so as to minimize/exclude the data that would take predictive power away from my model, and for practicality in the sense that, in the future, we can use multiple years of data from the past to predict current/future salary.
+The first thing I needed to do was get my data, which I (primarily) got from Baseball Savant. I also use two other small datasets from Rotowire because it (as of writing this) isn't possible to get a CSV from Baseball Savant which includes a player's team. So I got the CSV from Rotowire with the players' team names and merged them together.
 
-I began this project with the idea of making it a regression problem, but soon after starting, realized that using classification methods would be more effective and useful. Given the small amount of data for each season, and that some "superstar" players make a yearly salary sometimes five times as large as the average, the error in prediction was very difficult to minimize. By switching to classification, the model could better deal with outliers, while still maintaining predictive power.
+I scrape all of the probable pitcher data using Beautiful Soup from MLB.com, sometimes at the time of running the notebook, not every pitcher will be announced, but the notebook is setup to assign 'TBD' as the starting pitcher for whichever team(s) have not yet announced their starter.
+
+The model is based mainly on expected batting average (xBA). Many traditional models and prediction techniques use regular Batting Average, but I believe xBA (with the help of Statcast which collects all kinds of data in MLB ballparks like exit velocity, launch angle) is a better indicator of future performance. Other features that I consider are strikeout %, walk %, and handedness.
 
 
 ### 4 - Use Case Scenario <a name="Use_Case_Scenario"></a>
-These models can be used to know more in the future about, given a player’s statistics, whether he should be making more or less money based on his statistics, and how accurately we can make these predictions.
-
-These models can be useful for (among other things) NBA organizations when making decisions about their team's salary cap and potential players they want so sign. If considering signing a player who is currently being paid in a certain class, but who the model predicts should be making the amount of money in a class or two above, they may want to consider that the player could be in line for a pay-raise given his stats. So, that is something that they would need to be cognizant of when planning financially and allocating salaries for players.
-
-In a similar situation, players and agents can use this model, if it shows that he is underpaid, to lobby for bigger contracts based on game statistics.
+This analysis can be used to help optimize picks for any player who plays beat the streak. The notebook is setup to run daily without the need to change anything, so it will generalize well for the future and I can focus on improving the accuracy and engineering more advanced features.
