@@ -1,7 +1,7 @@
 # Beat The Streak Analysis
 
 ## Table of Contents
-1. [Problem Statement and Objective](#Problem_Statement_and_Objective)
+1. [Objective](#Problem_Statement_and_Objective)
 2. [Background](#Background)
 3. [Data Choices, Extraction, Cleaning, and Analysis](#Data_Choices)
 4. [Modeling](#Modeling)
